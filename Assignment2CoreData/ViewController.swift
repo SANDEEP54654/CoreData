@@ -38,15 +38,19 @@ class ViewController: UIViewController {
     //MARK: Nav BAr Button Action
     @objc func didTapAdd(){
         //open Alert to add new item with text filed
-        let alert = UIAlertController(title: "New Item", message: "Enter new Item", preferredStyle: .alert)
-        alert.addTextField(configurationHandler: nil)
-        alert.addAction(UIAlertAction(title: "Submit", style: .cancel, handler: { [weak self] _ in
-            guard let fieled = alert.textFields?.first,let text = fieled.text,!text.isEmpty else {
-                                  return
-            }
-        self?.createItem(name: text)
-        }))
-        present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "New Item", message: "Enter new Item", preferredStyle: .alert)
+            alert.addTextField(configurationHandler: nil)
+            alert.addAction(UIAlertAction(title: "Submit", style: .cancel, handler: { [weak self] _ in
+                guard let fieled = alert.textFields?.first,let text = fieled.text,!text.isEmpty else {
+                                      return
+                }
+            self?.createItem(name: text)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+       
+        
     }
     
     
